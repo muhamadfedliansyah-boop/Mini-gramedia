@@ -1,0 +1,516 @@
+@extends('layout.app')
+
+@section('content')
+
+
+    <div class="container py-4">
+        {{-- Banner --}}
+        <div id="banner-carousel" class="carousel slide rounded-3 overflow-hidden shadow-sm" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#banner-carousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#banner-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#banner-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#banner-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" alt="Promo buku 1"
+                        src="https://img.magnific.com/free-vector/gradient-world-book-day-landing-page-template_23-2149320541.jpg?semt=ais_test_b&w=740&q=80"
+                        style="height: 420px; object-fit: cover;" />
+                </div>
+
+                <div class="carousel-item">
+                    <img class="d-block w-100" alt="Promo buku 2"
+                        src="https://www.shutterstock.com/image-vector/book-festival-web-banner-design-260nw-2467607305.jpg"
+                        style="height: 420px; object-fit: cover;" />
+                </div>
+
+                <div class="carousel-item">
+                    <img class="d-block w-100" alt="Promo buku 3"
+                        src="https://www.shutterstock.com/image-vector/book-festival-horizontal-banner-bookstore-260nw-2554793783.jpg"
+                        style="height: 420px; object-fit: cover;" />
+                </div>
+
+                <div class="carousel-item">
+                    <img class="d-block w-100" alt="Promo buku 4"
+                        src="https://www.shutterstock.com/image-vector/book-fair-festival-horizontal-banner-260nw-2483737645.jpg"
+                        style="height: 420px; object-fit: cover;" />
+                </div>
+            </div>
+        </div>
+        {{-- Paket Langganan --}}
+        <div class="mt-4">
+            <div class="d-flex  align-items-center gap-2">
+                <span class="badge bg-yellow text-yellow-fg p-2">
+                    <i class="fa-solid fa-crown fs-3"></i>
+                </span>
+
+                <h2 class="mt-3 text-dark">Paket Langganan</h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #a7fc06 100%);">
+                        <div class="card-body row">
+                            <div class="col-4"></div>
+                            <div class="col-6 text-center text-dark">
+                                <h2 style="font-weight: bold;">NON-FICION</h2>
+                                <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
+                                <div>
+                                    Rp <span
+                                        style="font-size: 2rem;
+                                             font-weight: bold;
+                                             "
+                                        class="text-warning">
+                                        49.000
+                                    </span>
+
+                                    <br>
+                                    <span
+                                        style="font-weight: bold;
+                                                margin: 0;
+                                                !important"
+                                        class="text-secondary">
+
+                                        /30 DAY
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #06b6fc 100%);">
+                        <div class="card-body row">
+                            <div class="col-4"></div>
+                            <div class="col-6 text-center text-dark">
+                                <h2 style="font-weight: bold;">FICION</h2>
+                                <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
+                                <div>
+                                    Rp <span
+                                        style="font-size: 2rem;
+                                             font-weight: bold;
+                                             "
+                                        class="text-warning">
+                                        100.000
+                                    </span>
+
+                                    <br>
+                                    <span
+                                        style="font-weight: bold;
+                                                margin: 0;
+                                                !important"
+                                        class="text-secondary">
+
+                                        /30 DAY
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #fcfc06 100%);">
+                        <div class="card-body row">
+                            <div class="col-4"></div>
+                            <div class="col-6 text-center text-dark">
+                                <h2 style="font-weight: bold;">PREMIUM</h2>
+                                <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
+                                <div>
+                                    Rp <span
+                                        style="font-size: 2rem;
+                                             font-weight: bold;
+                                             "
+                                        class="text-warning">
+                                        1.000.000
+                                    </span>
+
+                                    <br>
+                                    <span
+                                        style="font-weight: bold;
+                                                margin: 0;
+                                                !important"
+                                        class="text-secondary">
+
+                                        /30 DAY
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Buku Terbaru --}}
+        <div class="mt-4">
+            <div class="d-flex align-items-center gap-2 mb-4">
+                <h2 class="mt-3 text-dark" style="font-weight: bold;">Buku Terbaru</h2>
+            </div>
+            <div id="wrapper-slider">
+                <div class="px-2">
+                    <div class="card">
+                        <img class="d-block mx-auto w-75 h-50" alt=""
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjfv8sDUtc2obHo-oipsjHhH2pAwvo_4mgueJdGK5bw&s=10" />
+                        <div class="d-flex gap-2 mt-2">
+                            <p class="badge"><i class="fa-solid fa-mobile"></i>PDF</p>
+                            <p class="badge">3+</p>
+                        </div>
+                        <div>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Fedliansyah</span></h5>
+                            <h5 style="font-size:1rem;"><span>Card with Title</span></h5>
+                            <h4 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-2">
+                    <div class="card">
+                        <img class="d-block mx-auto w-75 h-50" alt=""
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjfv8sDUtc2obHo-oipsjHhH2pAwvo_4mgueJdGK5bw&s=10" />
+                        <div class="d-flex gap-2 mt-2">
+                            <p class="badge"><i class="fa-solid fa-mobile"></i>PDF</p>
+                            <p class="badge">3+</p>
+                        </div>
+                        <div>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Fedliansyah</span></h5>
+                            <h5 style="font-size:1rem;"><span>Card with Title</span></h5>
+                            <h4 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-2">
+                    <div class="card">
+                        <img class="d-block mx-auto w-75 h-50" alt=""
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjfv8sDUtc2obHo-oipsjHhH2pAwvo_4mgueJdGK5bw&s=10" />
+                        <div class="d-flex gap-2 mt-2">
+                            <p class="badge"><i class="fa-solid fa-mobile"></i>PDF</p>
+                            <p class="badge">3+</p>
+                        </div>
+                        <div>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Fedliansyah</span></h5>
+                            <h5 style="font-size:1rem;"><span>Card with Title</span></h5>
+                            <h4 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-2">
+                    <div class="card">
+                        <img class="d-block mx-auto w-75 h-50" alt=""
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjfv8sDUtc2obHo-oipsjHhH2pAwvo_4mgueJdGK5bw&s=10" />
+                        <div class="d-flex gap-2 mt-2">
+                            <p class="badge"><i class="fa-solid fa-mobile"></i>PDF</p>
+                            <p class="badge">3+</p>
+                        </div>
+                        <div>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Fedliansyah</span></h5>
+                            <h5 style="font-size:1rem;"><span>Card with Title</span></h5>
+                            <h4 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-2">
+                    <div class="card">
+                        <img class="d-block mx-auto w-75 h-50" alt=""
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjfv8sDUtc2obHo-oipsjHhH2pAwvo_4mgueJdGK5bw&s=10" />
+                        <div class="d-flex gap-2 mt-2">
+                            <p class="badge"><i class="fa-solid fa-mobile"></i>PDF</p>
+                            <p class="badge">3+</p>
+                        </div>
+                        <div>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Fedliansyah</span></h5>
+                            <h5 style="font-size:1rem;"><span>Card with Title</span></h5>
+                            <h4 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-2">
+                    <div class="card">
+                        <img class="d-block mx-auto w-75 h-50" alt=""
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjfv8sDUtc2obHo-oipsjHhH2pAwvo_4mgueJdGK5bw&s=10" />
+                        <div class="d-flex gap-2 mt-2">
+                            <p class="badge"><i class="fa-solid fa-mobile"></i>PDF</p>
+                            <p class="badge">3+</p>
+                        </div>
+                        <div>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Fedliansyah</span></h5>
+                            <h5 style="font-size:1rem;"><span>Card with Title</span></h5>
+                            <h4 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-2">
+                    <div class="card">
+                        <img class="d-block mx-auto w-75 h-50" alt=""
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjfv8sDUtc2obHo-oipsjHhH2pAwvo_4mgueJdGK5bw&s=10" />
+                        <div class="d-flex gap-2 mt-2">
+                            <p class="badge"><i class="fa-solid fa-mobile"></i>PDF</p>
+                            <p class="badge">3+</p>
+                        </div>
+                        <div>
+                            <h5><span style="font-size: 0.8rem;" class="text-secondary">Fedliansyah</span></h5>
+                            <h5 style="font-size:1rem;"><span>Card with Title</span></h5>
+                            <h4 style="font-size: 1.2rem; font-weight: bold;">Rp 49.000</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Buku Gratis --}}
+
+        <div class="mt-4">
+            <div class="d-flex aligin-items-center gap-2 mb-4">
+                <h2 class="mt-3 text-dark" style="font-weight: bold;">Buku Gratis</h2>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="card d-flex flex-column">
+                        <div class="row row-0 flex-fill">
+                            <div class="col-md-3">
+                                <a href=#>
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bXKNhgkj7rrxBFcoIQ5ll4bUdKHTH_dx9VF7chdckw&s=10" alt="Buku Gratis" class="img-fluid"
+                                        class="w-100 h-100" object-cover alt="Buku Gratis"/>
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <div class="card-body h-full d-flex flex-column">
+                                    <h3 class="card-title">
+                                        <div class="badge"><i class="fa-solid fa-mobile"></i> PDF</div>
+                                    </h3>
+                                    <div class="text-secondary">
+                                        Penulis
+                                        <br><span class="text-dark">Judul Buku</span>
+                                    </div>
+                                    <div class="d-flex align-items-center pt-4 mt-auto">
+                                        <h3>
+                                            <span class="text-decoration-line-through text-secondary">Rp 49.000</span>
+                                            <span class="text-success">Rp 0</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="col-4">
+                    <div class="card d-flex flex-column">
+                        <div class="row row-0 flex-fill">
+                            <div class="col-md-3">
+                                <a href=#>
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bXKNhgkj7rrxBFcoIQ5ll4bUdKHTH_dx9VF7chdckw&s=10" alt="Buku Gratis" class="img-fluid"
+                                        class="w-100 h-100" object-cover alt="Buku Gratis"/>
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <div class="card-body h-full d-flex flex-column">
+                                    <h3 class="card-title">
+                                        <div class="badge"><i class="fa-solid fa-mobile"></i> PDF</div>
+                                    </h3>
+                                    <div class="text-secondary">
+                                        Penulis
+                                        <br><span class="text-dark">Judul Buku</span>
+                                    </div>
+                                    <div class="d-flex align-items-center pt-4 mt-auto">
+                                        <h3>
+                                            <span class="text-decoration-line-through text-secondary">Rp 49.000</span>
+                                            <span class="text-success">Rp 0</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="col-4">
+                    <div class="card d-flex flex-column">
+                        <div class="row row-0 flex-fill">
+                            <div class="col-md-3">
+                                <a href=#>
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bXKNhgkj7rrxBFcoIQ5ll4bUdKHTH_dx9VF7chdckw&s=10" alt="Buku Gratis" class="img-fluid"
+                                        class="w-100 h-100" object-cover alt="Buku Gratis"/>
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <div class="card-body h-full d-flex flex-column">
+                                    <h3 class="card-title">
+                                        <div class="badge"><i class="fa-solid fa-mobile"></i> PDF</div>
+                                    </h3>
+                                    <div class="text-secondary">
+                                        Penulis
+                                        <br><span class="text-dark">Judul Buku</span>
+                                    </div>
+                                    <div class="d-flex align-items-center pt-4 mt-auto">
+                                        <h3>
+                                            <span class="text-decoration-line-through text-secondary">Rp 49.000</span>
+                                            <span class="text-success">Rp 0</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="col-4">
+                    <div class="card d-flex flex-column">
+                        <div class="row row-0 flex-fill">
+                            <div class="col-md-3">
+                                <a href=#>
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bXKNhgkj7rrxBFcoIQ5ll4bUdKHTH_dx9VF7chdckw&s=10" alt="Buku Gratis" class="img-fluid"
+                                        class="w-100 h-100" object-cover alt="Buku Gratis"/>
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <div class="card-body h-full d-flex flex-column">
+                                    <h3 class="card-title">
+                                        <div class="badge"><i class="fa-solid fa-mobile"></i> PDF</div>
+                                    </h3>
+                                    <div class="text-secondary">
+                                        Penulis
+                                        <br><span class="text-dark">Judul Buku</span>
+                                    </div>
+                                    <div class="d-flex align-items-center pt-4 mt-auto">
+                                        <h3>
+                                            <span class="text-decoration-line-through text-secondary">Rp 49.000</span>
+                                            <span class="text-success">Rp 0</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="col-4">
+                    <div class="card d-flex flex-column">
+                        <div class="row row-0 flex-fill">
+                            <div class="col-md-3">
+                                <a href=#>
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bXKNhgkj7rrxBFcoIQ5ll4bUdKHTH_dx9VF7chdckw&s=10" alt="Buku Gratis" class="img-fluid"
+                                        class="w-100 h-100" object-cover alt="Buku Gratis"/>
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <div class="card-body h-full d-flex flex-column">
+                                    <h3 class="card-title">
+                                        <div class="badge"><i class="fa-solid fa-mobile"></i> PDF</div>
+                                    </h3>
+                                    <div class="text-secondary">
+                                        Penulis
+                                        <br><span class="text-dark">Judul Buku</span>
+                                    </div>
+                                    <div class="d-flex align-items-center pt-4 mt-auto">
+                                        <h3>
+                                            <span class="text-decoration-line-through text-secondary">Rp 49.000</span>
+                                            <span class="text-success">Rp 0</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="col-4">
+                    <div class="card d-flex flex-column">
+                        <div class="row row-0 flex-fill">
+                            <div class="col-md-3">
+                                <a href=#>
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8bXKNhgkj7rrxBFcoIQ5ll4bUdKHTH_dx9VF7chdckw&s=10" alt="Buku Gratis" class="img-fluid"
+                                        class="w-100 h-100" object-cover alt="Buku Gratis"/>
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <div class="card-body h-full d-flex flex-column">
+                                    <h3 class="card-title">
+                                        <div class="badge"><i class="fa-solid fa-mobile"></i> PDF</div>
+                                    </h3>
+                                    <div class="text-secondary">
+                                        Penulis
+                                        <br><span class="text-dark">Judul Buku</span>
+                                    </div>
+                                    <div class="d-flex align-items-center pt-4 mt-auto">
+                                        <h3>
+                                            <span class="text-decoration-line-through text-secondary">Rp 49.000</span>
+                                            <span class="text-success">Rp 0</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@push('styles')
+    <style>
+        .slick-prev:before,
+        .slick-next:before {
+            color: #000;
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#wrapper-slider').slick({
+                arrows: true,
+                dots: true,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 4,
+                slidesToScroll: 4,
+                responsive: [{
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ]
+            });
+        });
+    </script>
+@endpush
