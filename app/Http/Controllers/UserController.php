@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -13,18 +14,20 @@ class UserController extends Controller
         // validasi
         $validasi = $request->validate([
             'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'max:10'],
+            'email' => ['required','email:rfc,dns', 'unique:users,email'],
+            'password' => ['required', 'string', 'confirmed',
+                            Password::min(8)->max(10)->uncompromised()],
         ],
         [
             'name.required' => 'Nama harus diisi',
             'name.min' => 'Nama minimal 3 karakter',
             'email.required' => 'Email harus diisi',
-            'email.email' => 'Email harus diisi',
+            'email.email' => 'Email tidak valid',
             'email.unique' => 'Email sudah digunakan',
             'password.required' => 'Password harus diisi',
             'password.min' => 'Password minimal 8 karakter',
             'password.max' => 'Password maksimal 10 karakter',
+            'password.confirmed' => 'Konfirmasi password tidak cocok',
         ]);
 
         $createAccount = User::create([
@@ -48,17 +51,23 @@ class UserController extends Controller
             'email.required' => 'Email harus diisi',
             'password.required' => 'Password harus diisi',
         ]);
-        $auth = $request->except('_token');
-        $checkAuth = Auth::attempt($auth);
-        if($checkAuth){
+        if (Auth::attempt($validatedata)) {
+            $request->session()->regenerate();
+
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Berhasil login sebagai admin');
+            }
+
             return redirect()->route('home')->with('success', 'Berhasil login');
-        } else{
-        return redirect()->route('login')->with('error', 'Email atau password salah. coba lagi!')->withInput();
         }
+
+        return redirect()->route('login')->with('error', 'Email atau password salah. coba lagi!')->withInput();
     }
 
-    public function logout(){
+    public function logout(Request $request){
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->route('home')->with('success', 'Berhasil logout');
     }

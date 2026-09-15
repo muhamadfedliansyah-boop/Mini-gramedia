@@ -20,6 +20,23 @@
             </div>
         @endif
 
+        @if (Session::get('error'))
+            <div class="alert alert-important alert-danger alert-dismissible" role="alert">
+            <div class="d-flex">
+                <div>
+                </path>
+                    <path d="M18.364 5.636l-12.728 12.728"></path>
+                    <path d="M5.636 5.636l12.728 12.728"></path>
+                </svg>
+                </div>
+                <div>{{ Session::get('error') }}</div>
+            </div>
+            <a class="btn-close btn-close-white" data-bs-dismiss="alert"
+                aria-label="close"></a>
+            </div>
+        @endif
+
+
         {{-- Banner --}}
         <div id="banner-carousel" class="carousel slide rounded-3 overflow-hidden shadow-sm" data-bs-ride="carousel">
             <div class="carousel-indicators">
