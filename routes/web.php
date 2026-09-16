@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,12 +9,14 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['IsLoggedIn'])->group(function(){
-    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
     Route::prefix('admin')->name('admin.')->middleware('IsAdmin')->group(function(){
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
+
+        Route::resource('book-categories', BookCategoryController::class);
     });
 });
 

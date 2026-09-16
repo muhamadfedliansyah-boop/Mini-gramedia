@@ -29,4 +29,16 @@ class NavbarAuthStateTest extends TestCase
         $response->assertSee('Logout');
         $response->assertDontSee('Login');
     }
+
+    public function test_authenticated_user_can_logout(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->withSession(['_token' => 'test-token'])
+            ->actingAs($user)
+            ->post(route('logout'), ['_token' => 'test-token']);
+
+        $response->assertRedirect(route('home'));
+        $this->assertGuest();
+    }
 }

@@ -19,7 +19,5 @@ class IsAdmin
         } else {
             return $next($request);
         }
-
-        return $next($request);
     }
 }
