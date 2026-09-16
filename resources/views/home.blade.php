@@ -84,12 +84,13 @@
             </div>
 
             <div class="row g-4">
+                @foreach ($subscriptionPackages as $subscriptionPackage)
                 <div class="col-md-4">
-                    <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #a7fc06 100%);">
+                    <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, {{ $subscriptionPackage->color }} 100%);">
                         <div class="card-body row">
                             <div class="col-4"></div>
                             <div class="col-6 text-center text-dark">
-                                <h2 style="font-weight: bold;">NON-FICION</h2>
+                                <h2 style="font-weight: bold;">{{ strtoupper($subscriptionPackage->name) }}</h2>
                                 <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
                                 <div>
                                     Rp <span
@@ -97,7 +98,7 @@
                                              font-weight: bold;
                                              "
                                         class="text-warning">
-                                        49.000
+                                        {{ number_format($subscriptionPackage->price, 0, ',', '.') }}
                                     </span>
 
                                     <br>
@@ -106,76 +107,18 @@
                                                 margin: 0;
                                                 !important"
                                         class="text-secondary">
-
-                                        /30 DAY
+                                        @if($subscriptionPackage->description)
+                                            {{ $subscriptionPackage->description }}
+                                        @else
+                                            PAKET LENGKAP
+                                        @endif
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #06b6fc 100%);">
-                        <div class="card-body row">
-                            <div class="col-4"></div>
-                            <div class="col-6 text-center text-dark">
-                                <h2 style="font-weight: bold;">FICION</h2>
-                                <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
-                                <div>
-                                    Rp <span
-                                        style="font-size: 2rem;
-                                             font-weight: bold;
-                                             "
-                                        class="text-warning">
-                                        100.000
-                                    </span>
-
-                                    <br>
-                                    <span
-                                        style="font-weight: bold;
-                                                margin: 0;
-                                                !important"
-                                        class="text-secondary">
-
-                                        /30 DAY
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100" style="background: linear-gradient(135deg, #ffffff 0%, #fcfc06 100%);">
-                        <div class="card-body row">
-                            <div class="col-4"></div>
-                            <div class="col-6 text-center text-dark">
-                                <h2 style="font-weight: bold;">PREMIUM</h2>
-                                <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
-                                <div>
-                                    Rp <span
-                                        style="font-size: 2rem;
-                                             font-weight: bold;
-                                             "
-                                        class="text-warning">
-                                        1.000.000
-                                    </span>
-
-                                    <br>
-                                    <span
-                                        style="font-weight: bold;
-                                                margin: 0;
-                                                !important"
-                                        class="text-secondary">
-
-                                        /30 DAY
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
 

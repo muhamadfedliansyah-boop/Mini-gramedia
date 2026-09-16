@@ -30,7 +30,9 @@
                      ">Kategori Buku</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">Paket Langganan</a>
+                <a href="{{ route('admin.paket-langganan.index') }}"
+                 class="nav-link {{request()->routeIs('admin.paket-langgana.index') ? 'active' : ''}}
+                 ">Paket Langganan</a>
             </li>
             <li class="nav-item">
                 <a href="" class="nav-link">Buku</a>

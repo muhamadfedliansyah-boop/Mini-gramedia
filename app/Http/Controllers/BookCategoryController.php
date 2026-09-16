@@ -50,7 +50,8 @@ class BookCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $bookCategory = BookCategory::findOrFail($id);
+        return view('admin.book-categories.edit', compact('bookCategory'));
     }
 
     /**
@@ -58,7 +59,14 @@ class BookCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $bookCategory =  BookCategory::findOrFail($id);
+       
+        $validated = $request->validate([
+            'nama' => ['required', 'string', 'max:255'],
+        ]);
+        
+        $bookCategory->update(['name' => $validated['nama']]);
+        return redirect()->route('admin.book-categories.index')->with('success', 'Kategori buku berhasil diupdate');
     }
 
     /**
@@ -66,6 +74,8 @@ class BookCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bookCategory = BookCategory::findOrFail($id);
+        $bookCategory->delete();
+        return redirect()->route('admin.book-categories.index')->with('success', 'Kategori buku berhasil dihapus');
     }
 }
