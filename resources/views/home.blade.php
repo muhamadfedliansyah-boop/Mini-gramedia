@@ -107,7 +107,7 @@
                                                 margin: 0;
                                                 !important"
                                         class="text-secondary">
-                                        @if($subscriptionPackage->description)
+                                        @if(filled(trim($subscriptionPackage->description ?? '')))
                                             {{ $subscriptionPackage->description }}
                                         @else
                                             PAKET LENGKAP

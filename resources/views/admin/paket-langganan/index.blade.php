@@ -37,7 +37,7 @@
                         <tr>
                             <td>{{ $loop->iteration}}</td>
                             <td>{{ $subscriptionPackage->name }}</td>
-                            <td>{{ $subscriptionPackage->description }}</td>
+                            <td>{{ filled(trim($subscriptionPackage->description ?? '')) ? $subscriptionPackage->description : 'PAKET LENGKAP' }}</td>
                             <td>
                                 <span style="display:inline-block; width:20px; height:20px; background-color:{{ $subscriptionPackage->color }}; border-radius:4px;"></span>
                                 {{ $subscriptionPackage->color }}

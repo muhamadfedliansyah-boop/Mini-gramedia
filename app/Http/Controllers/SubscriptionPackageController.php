@@ -32,9 +32,12 @@ class SubscriptionPackageController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'color' => ['nullable', 'string'],
+            'color' => ['required', 'string'],
             'price' => ['required', 'integer', 'min:0'],
         ]);
+        $validated['description'] = filled(trim($validated['description'] ?? ''))
+            ? trim($validated['description'])
+            : 'PAKET LENGKAP';
 
         SubscriptionPackage::create($validated);
         return redirect()->route('admin.paket-langganan.index')->with('success', 'Paket langganan berhasil ditambahkan');
@@ -45,7 +48,7 @@ class SubscriptionPackageController extends Controller
      */
     public function show(string $id)
     {
-        
+
     }
 
     /**
@@ -54,7 +57,7 @@ class SubscriptionPackageController extends Controller
     public function edit(string $id)
     {
         $subscription = SubscriptionPackage::findOrFail($id);
-        return view('admin.paket-langganan.edit', compact('subscription'));
+        return view('admin.paket-langganan.edit', ['subscriptionPackage' => $subscription]);
     }
 
     /**
@@ -66,9 +69,12 @@ class SubscriptionPackageController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'color' => ['nullable', 'string'],
+            'color' => ['required', 'string'],
             'price' => ['required', 'integer', 'min:0'],
         ]);
+        $validated['description'] = filled(trim($validated['description'] ?? ''))
+            ? trim($validated['description'])
+            : 'PAKET LENGKAP';
         $subscription->update($validated);
         return redirect()->route('admin.paket-langganan.index')->with('success', 'Paket langganan berhasil diupdate');
     }
