@@ -20,7 +20,7 @@
         <div class="card-body">
 
 
-           <table class="table table-boardered table-resposive bg-white">
+           <table class="table table-boardered table-resposive bg-white" id="subscription-packages-table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -33,34 +33,30 @@
                 </thead>
 
                 <tbody>
-                    @foreach ( $subscriptionPackages as $subscriptionPackage )
-                        <tr>
-                            <td>{{ $loop->iteration}}</td>
-                            <td>{{ $subscriptionPackage->name }}</td>
-                            <td>{{ filled(trim($subscriptionPackage->description ?? '')) ? $subscriptionPackage->description : 'PAKET LENGKAP' }}</td>
-                            <td>
-                                <span style="display:inline-block; width:20px; height:20px; background-color:{{ $subscriptionPackage->color }}; border-radius:4px;"></span>
-                                {{ $subscriptionPackage->color }}
-                            </td>
-                            <td>Rp {{ number_format($subscriptionPackage->price, 0, ',', '.') }}</td>
-                            <td>
-                                <a href="{{ route('admin.paket-langganan.edit', $subscriptionPackage->id) }}"
-                                    class="btn btn-warning">Edit</a>
-                                <form action="{{ route('admin.paket-langganan.destroy', $subscriptionPackage->id) }}"
-                                     method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
+
                 </tbody>
 
            </table>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#subscription-packages-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('admin.paket-langganan.index')}}",
+                columns: [
+                    {data: 'DT_RowIndex', orderable:false , searchable: true},
+                    {data: 'name', name: 'name', orderable: true, searchable: true},
+                    {data: 'description', name: 'description', orderable: true, searchable: true},
+                    {data: 'color', name: 'color', orderable: true, searchable: true},
+                    {data: 'price', name: 'price', orderable: true, searchable: true},
+                    {data: 'action', orderable: true, searchable: false}
+                ]
+            })
+        });
+    </script>
+@endpush

@@ -32,22 +32,27 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label">Deskripsi</label>
-                    <textarea class="form-control @error('description') is-invalid @enderror"
-                              id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="color" class="form-label">Warna</label>
-                          <input type="color" class="form-control @error('color') is-invalid @enderror"
-                              id="color" name="color" value="{{ old('color', '#007bff') }}" required>
-                    @error('color')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+
+                    <div class="mb-3">
+                        <label for="color_text" class="form-label mb-2">Warna</label>
+                        <div class="d-flex align-items-center gap-2">
+                            <input type="text" 
+                                class="form-control @error('color') is-invalid @enderror"
+                                id="color_text" 
+                                name="color" 
+                                value="{{ old('color') }}" 
+                                placeholder="masukan warna"
+                                required>
+                                
+                                <input type="color" 
+                                    class="form-control form-control-color @error('color') is-invalid @enderror"
+                                    id="color_picker" 
+                                    value="{{ old('color', '#000000') }}">
+                            </div>
+                            @error('color')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
+                    </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
         </div>

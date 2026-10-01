@@ -4,16 +4,58 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SubscriptionPackage;
+use Yajra\DataTables\Facades\DataTables;
 
 class SubscriptionPackageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subscriptionPackages = SubscriptionPackage::all();
-        return view('admin.paket-langganan.index', compact('subscriptionPackages'));
+        if ($request->ajax()) {
+            $model = SubscriptionPackage::query();
+
+            return DataTables::eloquent($model)
+                ->addIndexColumn()
+
+                ->addColumn('description', function ($data) {
+                    return filled(trim($data->description ?? '')) ?
+                     $data->description : 'PAKET LENGKAP';
+                })
+
+                ->addColumn('color', function ($data) {
+                    return '<span style="display:inline-block; width:20px; height:20px; background-color:' .
+                             $data->color . '; border-radius:4px;"></span> ' . $data->color;
+                })
+
+                ->addColumn('price', function ($data) {
+                    return 'Rp ' . number_format($data->price, 0, ',', '.');
+                })
+
+                ->orderColumn('price', 'subscription_packages.price $1')
+
+                ->addColumn('action', function ($data) {
+                    $csrf = csrf_field();
+                    $method = method_field('DELETE');
+
+                    return '<a href="' . route('admin.paket-langganan.edit', $data->id) . '"
+                            class="btn btn-warning btn-sm">Edit</a>
+                            <form action="' . route('admin.paket-langganan.destroy', $data->id) . '"
+                                 method="POST" class="d-inline">
+                                ' . $csrf . '
+                                ' . $method . '
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm(\'Apakah Anda yakin ingin menghapus paket ini?\')">
+                                    Hapus
+                                </button>
+                            </form>';
+                })
+
+                ->rawColumns(['color', 'action'])
+                ->toJson();
+        }
+        return view('admin.paket-langganan.index');
     }
 
     /**

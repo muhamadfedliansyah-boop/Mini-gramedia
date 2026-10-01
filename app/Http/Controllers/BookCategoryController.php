@@ -4,16 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BookCategory;
+use Yajra\DataTables\Facades\DataTables;
 
 class BookCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $bookCategories = BookCategory::all();
-        return view('admin.book-categories.index', compact('bookCategories'));
+        if ($request->ajax()){
+            $model = BookCategory::query();
+
+            return DataTables::eloquent($model)
+            ->addIndexColumn()
+
+            ->addColumn('action', function ($data) {
+               $editUrl = route('admin.book-categories.edit', $data->id);
+               $deleteUrl = route('admin.book-categories.destroy', $data->id);
+               $csrf= csrf_field();
+               $method= method_field('DELETE');
+
+               $btnEdit= '<a href="' . $editUrl . '" class="btn btn-warning btn-sm">Edit</a>';
+               $btnDelete= '    <form action="' . $deleteUrl . '" method="POST" class="d-inline">
+                                    ' . $csrf .
+                                    $method . '
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm(\'Apakah Anda yakin ingin menghapus kategori ini?\')">
+                                        Hapus
+                                    </button>
+                                </form>';
+
+                return $btnEdit . $btnDelete;
+            })
+
+            ->rawColumns(['action'])
+            ->toJson();
+        }
+        return view('admin.book-categories.index');
     }
 
     /**
@@ -60,11 +88,11 @@ class BookCategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $bookCategory =  BookCategory::findOrFail($id);
-       
+
         $validated = $request->validate([
             'nama' => ['required', 'string', 'max:255'],
         ]);
-        
+
         $bookCategory->update(['name' => $validated['nama']]);
         return redirect()->route('admin.book-categories.index')->with('success', 'Kategori buku berhasil diupdate');
     }

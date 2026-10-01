@@ -20,7 +20,8 @@
         <div class="card-body">
 
 
-           <table class="table table-boardered table-resposive bg-white">
+           <table class="table table-boardered table-resposive bg-white"
+                    id="book-categories-table">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -30,29 +31,31 @@
                 </thead>
 
                 <tbody>
-                    @foreach ( $bookCategories as $bookCategory )
-                        <tr>
-                            <td>{{ $loop->iteration}}</td>
-                            <td>{{ $bookCategory->name }}</td>
 
-                            <td>
-                                <a href="{{ route('admin.book-categories.edit', $bookCategory->id) }}"
-                                    class="btn btn-warning">Edit</a>
-                                <form action="{{ route('admin.book-categories.destroy', $bookCategory->id) }}"
-                                     method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">
-                                        Hapus
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
                 </tbody>
 
            </table>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#book-categories-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('admin.book-categories.index')}}",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false,
+                        searchable: false
+                    },
+                    {data: 'name', name: 'name', orderable: true,
+                        searchable: true
+                    },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+                ]
+            })
+        });
+    </script>
+@endpush
