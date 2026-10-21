@@ -39,6 +39,8 @@ class SubscriptionPackageController extends Controller
                     $csrf = csrf_field();
                     $method = method_field('DELETE');
 
+                    $books = route('admin.subscription-packages.books', $data->id);
+
                     return '<a href="' . route('admin.paket-langganan.edit', $data->id) . '"
                             class="btn btn-warning btn-sm">Edit</a>
                             <form action="' . route('admin.paket-langganan.destroy', $data->id) . '"
@@ -49,7 +51,10 @@ class SubscriptionPackageController extends Controller
                                     onclick="return confirm(\'Apakah Anda yakin ingin menghapus paket ini?\')">
                                     Hapus
                                 </button>
-                            </form>';
+                            </form>
+                            
+                            <a href="' . $books . '" class="btn btn-info btn-sm">Buku</a>
+                            ';
                 })
 
                 ->rawColumns(['color', 'action'])
