@@ -12,6 +12,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/category/{id}', [HomeController::class, 'category'])->name('category.show');
 Route::get('/kategori/{id}', [HomeController::class, 'category']);
+Route::get('/subscription-package/{subscriptionPackage}/books', [SubscriptionPackageBookController::class, 'index'])
+        ->name('subscription-packages.books');
+Route::post('/subscription-package/{subscriptionPackage}/books/create', [SubscriptionPackageBookController::class, 'store'])
+        ->name('subscription-packages.books.create');
 
 Route::middleware(['IsLoggedIn'])->group(function(){
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
@@ -22,10 +26,12 @@ Route::middleware(['IsLoggedIn'])->group(function(){
         })->name('dashboard');
 
         Route::resource('book-categories', BookCategoryController::class);
-        Route::get('subscription-package/{id}/books', [SubscriptionPackageBookController::class, 'index'])
+        Route::get('subscription-package/{subscriptionPackage}/books', [SubscriptionPackageBookController::class, 'index'])
         ->name('subscription-packages.books');
-        Route::post('subscription-package/{id}/books', [SubscriptionPackageBookController::class, 'create'])
+        Route::post('subscription-package/{subscriptionPackage}/books/create', [SubscriptionPackageBookController::class, 'store'])
         ->name('subscription-packages.books.create');
+        Route::post('subscription-package/{subscriptionPackage}/books/store', [SubscriptionPackageBookController::class, 'store'])
+        ->name('subscription-packages.books.store');
         Route::resource('paket-langganan', SubscriptionPackageController::class);
         Route::resource('books', BookController::class);
     });

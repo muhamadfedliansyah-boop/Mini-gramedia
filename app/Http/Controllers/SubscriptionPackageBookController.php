@@ -10,9 +10,9 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SubscriptionPackageBookController extends Controller
 {
-    public function index($subscriptionPackageId, Request $request)
+    public function index($subscriptionPackage, Request $request)
     {
-        $subscriptionPackage = SubscriptionPackage::findOrFail($subscriptionPackageId);
+        $subscriptionPackage = SubscriptionPackage::findOrFail($subscriptionPackage);
 
         if ($request->ajax()) {
             $model = Book::with('bookCategory');
@@ -28,6 +28,10 @@ class SubscriptionPackageBookController extends Controller
                 ->editColumn('price', function ($row) {
                     return 'Rp ' . number_format($row->price, 0, ',', '.');
                 })
+                ->addColumn('CheckAdded', function ($row) use ($subscriptionPackage) {
+                    $addedBookIds = $subscriptionPackage->subscriptionPackageBooks()->pluck('book_id')->toArray();
+                    return in_array($row->id, $addedBookIds) ? 'Yes' : 'No';
+                })
                 ->rawColumns(['coverImg'])
                 ->toJson();
         }
@@ -35,16 +39,16 @@ class SubscriptionPackageBookController extends Controller
         return view('admin.SubscriptionPackage.books', compact('subscriptionPackage'));
     }
 
-    public function create(Request $request, $id)
+    public function store(Request $request, $subscriptionPackage)
     {
         $request->validate([
-            'book_ids' => 'required|array',
-            'book_ids.*' => 'exists:books,id',
+            'book_id' => 'required|array',
+            'book_id.*' => 'exists:books,id',
         ]);
 
-        $subscriptionPackage = SubscriptionPackage::findOrFail($id);
+        $subscriptionPackage = SubscriptionPackage::findOrFail($subscriptionPackage);
 
-        foreach ($request->book_ids as $bookId) {
+        foreach ($request->book_id as $bookId) {
             SubscriptionPackageBook::firstOrCreate([
                 'subscription_package_id' => $subscriptionPackage->id,
                 'book_id' => $bookId,
