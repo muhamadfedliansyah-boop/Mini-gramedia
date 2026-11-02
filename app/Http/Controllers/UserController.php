@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\BookCategory;
+use App\Models\SubscriptionPackageUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -70,5 +72,16 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('home')->with('success', 'Berhasil logout');
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        $subscriptions = SubscriptionPackageUser::with('subscriptionPackage')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        return view('User.profil', compact('user', 'subscriptions', 'categories'));
     }
 }

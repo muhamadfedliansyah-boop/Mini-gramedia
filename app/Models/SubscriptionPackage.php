@@ -17,4 +17,8 @@ class SubscriptionPackage extends Model
     public function subscriptionPackageUsers(): HasMany {
         return $this->hasMany(SubscriptionPackageUser::class);
     }
+
+    public function books() {
+        return $this->belongsToMany(Book::class, 'subscription_package_books', 'subscription_package_id', 'book_id');
+    }
 }

@@ -95,8 +95,11 @@
         @endif
     </ul>
 
-        <div class="navbar-nav flex-row order-md-last ms-auto">
+        <div class="navbar-nav flex-row order-md-last ms-auto align-items-center">
             @if (Auth::check())
+                <a href="{{ route('profile') }}" class="btn me-4 d-flex align-items-center">
+                    <i class="fa-solid fa-user"></i> Profil
+                </a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-danger">Logout</button>

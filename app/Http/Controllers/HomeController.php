@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\BookCategory;
 use App\Models\SubscriptionPackage;
+use App\Models\SubscriptionPackageBook;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -58,6 +59,31 @@ class HomeController extends Controller
         $books = $query->get();
 
         return view('search_result', compact('category', 'books'));
+    }
+
+    public function subscriptionPackageDetail(Request $request, $id){
+        $subscriptionPackage = SubscriptionPackage::findOrFail($id);
+
+        $query = SubscriptionPackageBook::with(['book.bookCategory'])
+            ->where('subscription_package_id', $subscriptionPackage->id);
+
+        if ($request->filled('search')) {
+            $search = trim($request->input('search'));
+            $query->whereHas('book', function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('writer', 'like', '%' . $search . '%');
+            });
+        }
+
+        $packageBooks = $query->get();
+        $books = $packageBooks->pluck('book')->filter();
+        $subscriptionPackage->setRelation('books', $books);
+
+        if (view()->exists('User.SubscriptionPackage.show')) {
+            return view('User.SubscriptionPackage.show', compact('subscriptionPackage', 'packageBooks', 'books'));
+        }
+
+        return view('subscription_package_detail', compact('subscriptionPackage', 'packageBooks', 'books'));
     }
 }
 

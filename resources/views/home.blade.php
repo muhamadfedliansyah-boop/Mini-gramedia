@@ -73,49 +73,52 @@
         </div>
         {{-- Paket Langganan --}}
         <div class="mt-4">
-            <div class="d-flex  align-items-center gap-2">
+            <div class="d-flex align-items-center gap-2">
                 <span class="badge bg-yellow text-yellow-fg p-2">
                     <i class="fa-solid fa-crown fs-3"></i>
                 </span>
-
                 <h2 class="mt-3 text-dark">Paket Langganan</h2>
             </div>
 
             <div class="row g-4">
                 @foreach ($subscriptionPackages as $subscriptionPackage)
                     <div class="col-md-4">
-                        <div class="card h-100"
-                            style="background: linear-gradient(135deg, #ffffff 0%, {{ $subscriptionPackage->color }} 100%);">
-                            <div class="card-body row">
-                                <div class="col-4"></div>
-                                <div class="col-6 text-center text-dark">
-                                    <h2 style="font-weight: bold;">{{ strtoupper($subscriptionPackage->name) }}</h2>
-                                    <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
-                                    <div>
-                                        Rp <span
-                                            style="font-size: 2rem;
-                                             font-weight: bold;
-                                             "
-                                            class="text-warning">
-                                            {{ number_format($subscriptionPackage->price, 0, ',', '.') }}
-                                        </span>
+                        <a href="{{ route('subscription-packages.subscription_package_detail', $subscriptionPackage->id) }}" class="text-decoration-none d-block h-100">
+                            <div class="card h-100 shadow-sm"
+                                style="background: linear-gradient(135deg, #ffffff 0%, {{ $subscriptionPackage->color }} 100%); cursor: pointer;"
+                                onmouseover="this.style.boxShadow='0 8px 20px rgba(0,0,0,0.15)';"
+                                onmouseout="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';">
+                                <div class="card-body row">
+                                    <div class="col-4"></div>
+                                    <div class="col-6 text-center text-dark">
+                                        <h2 style="font-weight: bold;">{{ strtoupper($subscriptionPackage->name) }}</h2>
+                                        <p class="text-secondary" style="font-weight: bold; margin: 0; !important">PACKAGE</p>
+                                        <div>
+                                            Rp <span
+                                                style="font-size: 2rem;
+                                                 font-weight: bold;
+                                                 "
+                                                class="text-warning">
+                                                {{ number_format($subscriptionPackage->price, 0, ',', '.') }}
+                                            </span>
 
-                                        <br>
-                                        <span
-                                            style="font-weight: bold;
-                                                margin: 0;
-                                                !important"
-                                            class="text-secondary">
-                                            @if (filled(trim($subscriptionPackage->description ?? '')))
-                                                {{ $subscriptionPackage->description }}
-                                            @else
-                                                PAKET LENGKAP
-                                            @endif
-                                        </span>
+                                            <br>
+                                            <span
+                                                style="font-weight: bold;
+                                                    margin: 0;
+                                                    !important"
+                                                class="text-secondary">
+                                                @if (filled(trim($subscriptionPackage->description ?? '')))
+                                                    {{ $subscriptionPackage->description }}
+                                                @else
+                                                    PAKET LENGKAP
+                                                @endif
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SubscriptionPackage;
+use App\Models\SubscriptionPackageUser;
 use Yajra\DataTables\Facades\DataTables;
 
 class SubscriptionPackageController extends Controller
@@ -134,5 +135,29 @@ class SubscriptionPackageController extends Controller
         $subscription = SubscriptionPackage::findOrFail($id);
         $subscription->delete();
         return redirect()->route('admin.paket-langganan.index')->with('success', 'Paket langganan berhasil dihapus');
+    }
+
+    public function checkoutPage($id)
+    {
+        $subscriptionPackage = SubscriptionPackage::findOrFail($id);
+        $subscription = $subscriptionPackage;
+
+        if (view()->exists('User.SubscriptionPackage.checkout')) {
+            return view('User.SubscriptionPackage.checkout', compact('subscriptionPackage', 'subscription'));
+        }
+
+        return view('admin.paket-langganan.checkout', compact('subscriptionPackage', 'subscription'));
+    }
+
+    public function checkout(Request $request, $id)
+    {
+        $subscriptionPackage = SubscriptionPackage::findOrFail($id);
+
+        SubscriptionPackageUser::create([
+            'subscription_package_id' => $subscriptionPackage->id,
+            'user_id' => auth()->user()->id,
+            'expired_date' => now()->addDays(30)->format('Y-m-d'),
+        ]);
+        return redirect()->route('home')->with('success', 'Pembayaran berhasil. Terima kasih telah berlangganan!');
     }
 }
