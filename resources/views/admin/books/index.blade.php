@@ -7,9 +7,12 @@
                 {{ session('success') }}
             </div>
         @endif
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
             <h3>Data Buku</h3>
-            <a href="{{ route('admin.books.create') }}" class="btn btn-success">Tambah Data Buku</a>
+            <div>
+                <a href="{{ route('admin.books.export') }}" class="btn btn-success me-2">Export ke Excel</a>
+                <a href="{{ route('admin.books.create') }}" class="btn btn-primary">Tambah Data Buku</a>
+            </div>
         </div>
     </div>
 

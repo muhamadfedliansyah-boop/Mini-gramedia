@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SubscriptionPackage;
 use App\Models\SubscriptionPackageUser;
+use App\Exports\SubscriptionPackagesExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class SubscriptionPackageController extends Controller
@@ -159,5 +161,10 @@ class SubscriptionPackageController extends Controller
             'expired_date' => now()->addDays(30)->format('Y-m-d'),
         ]);
         return redirect()->route('home')->with('success', 'Pembayaran berhasil. Terima kasih telah berlangganan!');
+    }
+    
+    public function export()
+    {
+        return Excel::download(new SubscriptionPackagesExport, 'paket_langganan.xlsx');
     }
 }

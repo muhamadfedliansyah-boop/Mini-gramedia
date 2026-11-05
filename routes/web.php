@@ -21,6 +21,9 @@ Route::get('/subscription-package/{subscriptionPackage}/detail', [HomeController
     ->name('subscription-packages.subscription_package_detail');
 Route::get('/paket-langganan/{subscriptionPackage}', [HomeController::class, 'subscriptionPackageDetail']);
 
+// Route Detail Buku untuk User / Publik
+Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
+
 // Routes untuk User yang sudah login
 Route::middleware(['IsLoggedIn'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
@@ -36,14 +39,21 @@ Route::middleware(['IsLoggedIn'])->group(function () {
     Route::post('/subscription-package/{id}/checkout', [SubscriptionPackageController::class, 'checkout'])
         ->name('user.subscription-package.checkout');
 
+    Route::resource('books', BookController::class)->except(['show']);
+
     // Routes Khusus Admin
     Route::prefix('admin')->name('admin.')->middleware('IsAdmin')->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
 
+        Route::get('book-categories/export', [BookCategoryController::class, 'export'])->name('book-categories.export');
         Route::resource('book-categories', BookCategoryController::class);
+
+        Route::get('books/export', [BookController::class, 'export'])->name('books.export');
         Route::resource('books', BookController::class);
+
+        Route::get('paket-langganan/export', [SubscriptionPackageController::class, 'export'])->name('paket-langganan.export');
         Route::resource('paket-langganan', SubscriptionPackageController::class);
 
         // Manajemen Buku di dalam Paket Langganan (Admin)

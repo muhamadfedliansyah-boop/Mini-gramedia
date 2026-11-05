@@ -2,11 +2,14 @@
 
 @section('content')
     <div class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2>Tambah Paket Langganan</h2>
-            <a href="{{ route('admin.paket-langganan.create') }}" class="btn btn-primary mb-3">
-                Tambah paket langganan
-            </a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Data Paket Langganan</h2>
+            <div>
+                <a href="{{ route('admin.paket-langganan.export') }}" class="btn btn-success me-2">Export ke Excel</a>
+                <a href="{{ route('admin.paket-langganan.create') }}" class="btn btn-primary">
+                    Tambah paket langganan
+                </a>
+            </div>
         </div>
 
         @if (session('success'))

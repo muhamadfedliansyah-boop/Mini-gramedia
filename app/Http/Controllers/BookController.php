@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\BookCategory;
+use App\Exports\BooksExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
@@ -101,9 +103,10 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $book = Book::where('id', $id)->with('subscriptionPackageBooks.subscriptionPackage')->first();
+        return view('user.books.show', compact('book'));
     }
 
     /**
@@ -172,5 +175,10 @@ class BookController extends Controller
 
         $book->delete();
         return redirect()->route('admin.books.index')->with('success', 'Buku berhasil dihapus');
+    }
+
+    public function export()
+    {
+        return Excel::download(new BooksExport, 'books.xlsx');
     }
 }

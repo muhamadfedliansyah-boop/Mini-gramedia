@@ -110,9 +110,6 @@
             @if ($subscriptions->isNotEmpty())
                 <div class="d-flex flex-column gap-3">
                     @foreach ($subscriptions as $item)
-                        @php
-                            $pkg = $item->subscriptionPackage;
-                        @endphp
                         <div class="card shadow-sm border" style="border-radius: 8px; border-color: #e5e7eb !important;">
                             {{-- Bagian Atas: Tanggal Transaksi & Status Sukses --}}
                             <div class="d-flex justify-content-between align-items-center px-4 py-2 border-bottom" style="border-color: #f1f3f5 !important;">
@@ -130,9 +127,9 @@
                                     {{-- Sisi Kiri: Nama Paket --}}
                                     <div style="flex: 1 1 0; min-width: 0;">
                                         <div class="fw-bold text-dark" style="font-size: 1.05rem;">
-                                            @if ($pkg)
-                                                <a href="{{ route('subscription-packages.subscription_package_detail', $pkg->id) }}" class="text-dark text-decoration-none hover-primary">
-                                                    {{ $pkg->name }}
+                                            @if ($item->subscriptionPackage)
+                                                <a href="{{ route('subscription-packages.subscription_package_detail', $item->subscriptionPackage->id) }}" class="text-dark text-decoration-none hover-primary">
+                                                    {{ $item->subscriptionPackage->name }}
                                                 </a>
                                             @else
                                                 Paket Tidak Ditemukan
@@ -151,7 +148,7 @@
                                     <div class="text-start text-md-end" style="flex: 1 1 0; min-width: 0;">
                                         <div class="text-secondary small" style="font-size: 0.78rem;">Total Pembayaran</div>
                                         <div class="fw-bold text-dark" style="font-size: 1.05rem;">
-                                            Rp {{ number_format($pkg->price ?? 0, 0, ',', '.') }}
+                                            Rp {{ number_format($item->subscriptionPackage->price ?? 0, 0, ',', '.') }}
                                         </div>
                                     </div>
                                 </div>

@@ -79,9 +79,9 @@ class UserController extends Controller
         $user = Auth::user();
         $subscriptions = SubscriptionPackageUser::with('subscriptionPackage')
             ->where('user_id', $user->id)
-            ->latest()
+            ->orderBy('created_at', 'asc')
             ->get();
 
-        return view('User.profil', compact('user', 'subscriptions', 'categories'));
+        return view('User.profil', compact('user', 'subscriptions'));
     }
 }

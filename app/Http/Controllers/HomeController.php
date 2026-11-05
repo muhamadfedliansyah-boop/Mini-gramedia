@@ -80,7 +80,8 @@ class HomeController extends Controller
         $subscriptionPackage->setRelation('books', $books);
 
         if (view()->exists('User.SubscriptionPackage.show')) {
-            return view('User.SubscriptionPackage.show', compact('subscriptionPackage', 'packageBooks', 'books'));
+            return view('User.SubscriptionPackage.show',
+                compact('subscriptionPackage', 'packageBooks', 'books'));
         }
 
         return view('subscription_package_detail', compact('subscriptionPackage', 'packageBooks', 'books'));
