@@ -38,6 +38,9 @@ Route::middleware(['IsLoggedIn'])->group(function () {
         ->name('subscription-packages.checkout');
     Route::post('/subscription-package/{id}/checkout', [SubscriptionPackageController::class, 'checkout'])
         ->name('user.subscription-package.checkout');
+    Route::get('/carts', [CartController::class, 'index'])->name('carts');
+    Route::post('/carts', [CartController::class, 'store'])->name('carts.store');
+    Route::delete('/carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
 
     Route::resource('books', BookController::class)->except(['show']);
 
