@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['user_id', 'book_id', 'subscription_packages_id'])]
+#[Fillable(['user_id', 'book_id', 'subscription_package_id'])]
 class Cart extends Model
 {
     public function user(): BelongsTo
@@ -21,6 +21,6 @@ class Cart extends Model
 
     public function subscriptionPackage(): BelongsTo
     {
-        return $this->belongsTo(SubscriptionPackage::class, 'subscription_packages_id');
+        return $this->belongsTo(SubscriptionPackage::class);
     }
 }

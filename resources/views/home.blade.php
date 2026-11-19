@@ -136,7 +136,9 @@
                             <div class="card-body text-center p-0 d-flex flex-column flex-fill">
                                 <div class="p-3 pb-0">
                                     <div class="border rounded d-flex align-items-center justify-content-center overflow-hidden bg-light" style="height: 220px;">
-                                        <img class="img-fluid" alt="{{ $book->title }}" src="{{ asset($book->cover) }}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        <a href="{{ route('books.show', $book->id) }}" class="d-flex align-items-center justify-content-center w-100 h-100">
+                                            <img class="img-fluid" alt="{{ $book->title }}" src="{{ asset($book->cover) }}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="bg-white border-0 text-start p-3 rounded-bottom d-flex flex-column flex-fill">

@@ -6,7 +6,9 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\SubscriptionPackageController;
 use App\Http\Controllers\SubscriptionPackageBookController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CheckoutController;
 
 // Public Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -41,6 +43,9 @@ Route::middleware(['IsLoggedIn'])->group(function () {
     Route::get('/carts', [CartController::class, 'index'])->name('carts');
     Route::post('/carts', [CartController::class, 'store'])->name('carts.store');
     Route::delete('/carts/{id}', [CartController::class, 'destroy'])->name('carts.destroy');
+
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/{id}', [CheckoutController::class, 'show'])->name('checkout.show');
 
     Route::resource('books', BookController::class)->except(['show']);
 

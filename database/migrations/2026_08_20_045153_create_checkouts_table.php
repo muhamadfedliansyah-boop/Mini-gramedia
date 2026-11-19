@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->enum('payment_method', ['Free', 'Virtual Account', 'QRIS']);
             $table->integer('total_book');
             $table->integer('total_book_price');
             $table->integer('total_price');
-            $table->enum('status', ['Pending', 'Done']);
+
             $table->timestamps();
         });
     }
@@ -28,6 +27,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscription_checkouts');
+        Schema::table('checkouts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+
+        $table->enum('payment_method', ['Free', 'Virtual Account', 'QRIS'])->chace();
+        $table->enum('status', ['Pending', 'Done']);
+       });
     }
 };
